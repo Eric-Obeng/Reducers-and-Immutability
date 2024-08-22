@@ -1,39 +1,22 @@
 import { createAction, props } from '@ngrx/store';
 
-export const increment = createAction('[Counter Component] Increment');
-export const decrement = createAction('[Counter Component] Decrement');
-export const reset = createAction('[Counter Component] Reset');
-
-// action for set count
+export const increment = createAction('[Counter] Increment');
+export const decrement = createAction('[Counter] Decrement');
+export const reset = createAction('[Counter] Reset');
 export const setCount = createAction(
-  '[Counter Component] Set Count',
+  '[Counter] Set Count',
   props<{ count: number }>()
 );
-
-// custom action for increment by value
 export const incrementBy = createAction(
-  '[Counter Component] Increment By',
-  props<{ value: number }>() //accepts payload
+  '[Counter] Increment By',
+  props<{ value: number }>()
 );
-
-// custom action for decrement by value
 export const decrementBy = createAction(
-  '[Counter Component] Decrement By',
+  '[Counter] Decrement By',
   props<{ value: number }>()
 );
-
-// custom action for decrement by value
 export const multiplyBy = createAction(
-  '[Counter Component] Multiply By',
+  '[Counter] Multiply By',
   props<{ value: number }>()
 );
-
-// union type for all actions
-export type counterActionsUnion =
-  | ReturnType<typeof increment>
-  | ReturnType<typeof decrement>
-  | ReturnType<typeof reset>
-  | ReturnType<typeof setCount>
-  | ReturnType<typeof incrementBy>
-  | ReturnType<typeof decrementBy>
-  | ReturnType<typeof multiplyBy>;
+export const undo = createAction('[Counter] Undo');
