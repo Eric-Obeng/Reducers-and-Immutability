@@ -5,13 +5,21 @@
     <button class="increase" (click)="increment()">+</button>
   </div>
   <div class="col-2">
-    <input type="number" [(ngModel)]="inputCount" placeholder="Enter count" />
-    <button (click)="setCount()" class="reset">Set Count</button>
+    <input type="number" [(ngModel)]="inputValue" placeholder="Enter count" />
+    <!-- <button (click)="setCount()" class="set-count">Set Count</button> -->
   </div>
   <div class="col-3">
-    @if ((count$ | async) !== 0 ) {
-
-    <button class="reset" (click)="reset()">Reset</button>
-    }
+    <button (click)="incrementByValue()" class="reset">
+      Increment By {{ inputValue }}
+    </button>
+    <button (click)="decrementByValue()" class="reset">
+      Decrement By {{ inputValue }}
+    </button>
+    <button (click)="multiplyByValue()" class="reset">
+      Multiply By {{ inputValue }}
+    </button>
+    <button *ngIf="(count$ | async) !== 0" class="reset" (click)="reset()">
+      Reset
+    </button>
   </div>
 </div>

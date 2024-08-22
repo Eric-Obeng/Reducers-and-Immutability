@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 80%;
   gap: 2rem;
   backface-visibility: hidden;
 
@@ -12,6 +13,7 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
+    width: 100%;
     animation: numberAnimate 2s ease-in-out;
 
     button {
@@ -34,7 +36,6 @@
     }
 
     .number {
-      width: 15rem;
       text-align: center;
       font-size: 10rem;
     }
@@ -42,8 +43,9 @@
   .col-2 {
     display: flex;
     flex-direction: column;
-    width: 25rem;
+    // width: 25rem;
     gap: 0.8rem;
+    // width: 100%;
 
     input {
       height: 4rem;
@@ -51,6 +53,7 @@
       border: .3rem solid #00bfff;
       border-radius: 1.5rem;
       padding-left: 0.5rem;
+      width: 100%;
 
       &:focus {
         outline: none;
@@ -60,13 +63,16 @@
   }
 
   .col-3 {
-    width: 25rem;
+    display: flex;
+    width: 100%;
+    gap: 1.2rem;
+    // width: 25rem;
     animation: resetAnimate 2s ease-in-out;
   }
 }
 
 .reset {
-  width: 100%;
+  // width: 500rem;
   padding: 0.8rem;
   border-radius: 1.5rem;
   font-family: inherit;

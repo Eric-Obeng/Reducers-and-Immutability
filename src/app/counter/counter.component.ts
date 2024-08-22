@@ -6,9 +6,12 @@ import {
   decrement,
   reset,
   setCount,
+  incrementBy,
+  decrementBy,
+  multiplyBy,
 } from '../state/counter.actions';
-import { selectCurrentCount } from '../state/counter.selectors';
 import { CommonModule } from '@angular/common';
+import { selectCounterState } from '../state/counter.selectors';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -20,29 +23,49 @@ import { FormsModule } from '@angular/forms';
 })
 export class CounterComponent {
   count$: Observable<number>;
-  inputCount: number = 0;
+  inputValue: number = 0;
 
   constructor(private store: Store) {
-    this.count$ = this.store.select(selectCurrentCount);
+    this.count$ = this.store.select(selectCounterState);
   }
 
+  // dispatch an increment action
   increment() {
     this.store.dispatch(increment());
   }
 
+  // dispatch a decrement action
   decrement() {
     this.store.dispatch(decrement());
   }
 
+  // dispatch a reset action
   reset() {
     this.store.dispatch(reset());
-    this.inputCount = 0;
+    // set counter to 0 when reset button is clicked
+    this.inputValue = 0;
   }
 
+  // dispatch a setCount action
   setCount() {
-    if (this.inputCount >= 0) {
+    if (this.inputValue >= 0) {
       this.store.dispatch(reset());
-      this.store.dispatch(setCount({ count: this.inputCount }));
+      this.store.dispatch(setCount({ count: this.inputValue }));
     }
+  }
+
+  // dispatch an incrementBy actionincrementValue()
+  incrementByValue() {
+    this.store.dispatch(incrementBy({ value: this.inputValue }));
+  }
+
+  // dispatch a decrement by action
+  decrementByValue() {
+    this.store.dispatch(decrementBy({ value: this.inputValue }));
+  }
+
+  // dispatch a multiply by action
+  multiplyByValue() {
+    this.store.dispatch(multiplyBy({ value: this.inputValue }));
   }
 }
