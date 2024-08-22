@@ -1,8 +1,5 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
+import { AppState } from '../interface/counterState.model';
 
-export const selectCounterState = createFeatureSelector<number>('counter')
-
-export const selectCurrentCount = createSelector(
-  selectCounterState,
-  (state: number) => state
-);
+export const selectCounterState = (state: AppState) => state.counter.count;
+export const selectCounterHistory = (state: AppState) => state.counter.history;
