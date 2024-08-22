@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 80%;
+  // width: 80%;
   gap: 2rem;
   backface-visibility: hidden;
 
@@ -64,9 +64,10 @@
 
   .col-3 {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     width: 100%;
     gap: 1.2rem;
-    // width: 25rem;
     animation: resetAnimate 2s ease-in-out;
   }
 }

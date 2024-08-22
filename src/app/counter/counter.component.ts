@@ -9,44 +9,46 @@ import {
   incrementBy,
   decrementBy,
   multiplyBy,
+  undo,
 } from '../state/counter.actions';
 import { CommonModule } from '@angular/common';
-import { selectCounterState } from '../state/counter.selectors';
+import {
+  selectCounterState,
+  selectCounterHistory,
+} from '../state/counter.selectors';
 import { FormsModule } from '@angular/forms';
+import { AppState } from '../interface/counterState.model'; // Import the AppState interface
 
 @Component({
   selector: 'app-counter',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './counter.component.html',
-  styleUrl: './counter.component.scss',
+  styleUrls: ['./counter.component.scss'],
 })
 export class CounterComponent {
   count$: Observable<number>;
-  inputValue: number = 0;
+  history$: Observable<number[]>;
+  inputValue!: number;
 
-  constructor(private store: Store) {
+  constructor(private store: Store<AppState>) {
     this.count$ = this.store.select(selectCounterState);
+    this.history$ = this.store.select(selectCounterHistory);
   }
 
-  // dispatch an increment action
   increment() {
     this.store.dispatch(increment());
   }
 
-  // dispatch a decrement action
   decrement() {
     this.store.dispatch(decrement());
   }
 
-  // dispatch a reset action
   reset() {
     this.store.dispatch(reset());
-    // set counter to 0 when reset button is clicked
     this.inputValue = 0;
   }
 
-  // dispatch a setCount action
   setCount() {
     if (this.inputValue >= 0) {
       this.store.dispatch(reset());
@@ -54,18 +56,20 @@ export class CounterComponent {
     }
   }
 
-  // dispatch an incrementBy actionincrementValue()
   incrementByValue() {
     this.store.dispatch(incrementBy({ value: this.inputValue }));
   }
 
-  // dispatch a decrement by action
   decrementByValue() {
     this.store.dispatch(decrementBy({ value: this.inputValue }));
   }
 
-  // dispatch a multiply by action
   multiplyByValue() {
     this.store.dispatch(multiplyBy({ value: this.inputValue }));
+  }
+
+  undoLastAction() {
+    this.store.dispatch(undo());
+    this.inputValue = 0;
   }
 }

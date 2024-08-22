@@ -6,9 +6,11 @@
   </div>
   <div class="col-2">
     <input type="number" [(ngModel)]="inputValue" placeholder="Enter count" />
-    <!-- <button (click)="setCount()" class="set-count">Set Count</button> -->
   </div>
   <div class="col-3">
+    <button (click)="setCount()" class="reset">
+      Set Count By {{ inputValue }}
+    </button>
     <button (click)="incrementByValue()" class="reset">
       Increment By {{ inputValue }}
     </button>
@@ -21,5 +23,14 @@
     <button *ngIf="(count$ | async) !== 0" class="reset" (click)="reset()">
       Reset
     </button>
+    <button class="reset" (click)="undoLastAction()">Undo</button>
+  </div>
+  <div class="history">
+    <h3>Counter History:</h3>
+    <ul>
+      <li *ngFor="let value of history$ | async">
+        {{ value }}
+      </li>
+    </ul>
   </div>
 </div>
